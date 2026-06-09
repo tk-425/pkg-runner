@@ -1,0 +1,17 @@
+.devflow/
+.devflow-archive/
+.devflow/
+.devflow-archive/
+CONTEXT.md
+
+.agents/
+.claude/
+.codex/
+.opencode/
+.mcp.json
+opencode.json
+
+# BEGIN MCPKIT
+# mcpkit generated local MCP wrappers
+.mcpkit/
+# END MCPKIT
