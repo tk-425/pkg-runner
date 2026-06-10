@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"runtime/debug"
 
 	"github.com/tk-425/pkg-runner/internal/discover"
 	"github.com/tk-425/pkg-runner/internal/tui"
@@ -13,8 +14,16 @@ var version = "dev"
 
 func main() {
 	ver := flag.Bool("v", false, "print version and exit")
-	versionFlag := 	flag.Bool("version", false, "print version and exit")
+	versionFlag := flag.Bool("version", false, "print version and exit")
 	flag.Parse()
+
+	if version == "dev" {
+		if info, ok := debug.ReadBuildInfo(); ok {
+			if v := info.Main.Version; v != "" && v != "(devel)" {
+				version = v
+			}
+		}
+	}
 
 	if *ver || *versionFlag {
 		fmt.Printf("pkg-runner %s\n", version)
