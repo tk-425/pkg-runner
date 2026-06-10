@@ -18,3 +18,4 @@ opencode.json
 
 .pip2p/
 /pkg-runner
+.codegraph/
