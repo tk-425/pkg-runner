@@ -15,3 +15,6 @@ opencode.json
 # mcpkit generated local MCP wrappers
 .mcpkit/
 # END MCPKIT
+
+.pip2p/
+/pkg-runner
