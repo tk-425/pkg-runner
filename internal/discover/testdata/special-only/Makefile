@@ -1,0 +1,3 @@
+.SILENT:
+.DEFAULT:
+.PHONY: build
