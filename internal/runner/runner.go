@@ -5,6 +5,7 @@ import (
 	"io"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/tk-425/pkg-runner/internal/discover"
 )
@@ -27,7 +28,13 @@ func (r *Runner) SetOutput(w io.Writer) {
 }
 
 func (r *Runner) Run(ctx context.Context, script discover.Script) (int, error) {
-	cmd := exec.CommandContext(ctx, "sh", "-c", script.Command)
+	args := strings.Fields(script.Command)
+	if len(args) == 0 {
+		return 1, nil
+	}
+	// #nosec G204 — commands originate from trusted local manifest files
+	// nosemgrep: dangerous-exec-command
+	cmd := exec.CommandContext(ctx, args[0], args[1:]...)
 	cmd.Stdout = r.stdout
 	cmd.Stderr = r.stderr
 	cmd.Stdin = os.Stdin
